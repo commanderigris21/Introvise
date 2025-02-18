@@ -1,0 +1,208 @@
+root {
+    background-color: white;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    font-family: sans-serif;
+}
+
+.Nav {
+    position: fixed;
+    left: 60px;
+    z-index: +1;
+    font-size: 25px;
+    font-family: sans-serif;
+    font-weight: bolder;
+    color: blue;
+}
+
+.half {
+    background-color: #a2cdfc;
+    width: 48%;
+    height: 100vh;
+    position: fixed;
+    top:0px;
+    left:0px;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.ad {
+    border: 1px solid black;
+    width: 350px;
+    height: 180px;
+    position: fixed;
+    text-align: center;
+    top: 54%;
+    left: 23vh;
+    background-color: white;
+    border:none;
+    overflow-wrap: break-word;
+
+}
+
+.half .ad h1 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    
+
+}
+
+
+.ad p {
+    font-size: 14px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    position: fixed;
+    bottom: 170px;
+    left: 240px;
+}
+
+.head {
+    position: fixed;
+    right: 280px;
+    top: 100px;
+    font-size:22px;
+    font-family: sans-serif;
+
+
+    
+}
+
+.head span{
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+.sec {
+    position: fixed;
+    right: 365px;
+    top: 140px;
+    font-size: 20px;
+    font-family: sans-serif;
+
+}
+
+.img {
+    height:30px;
+    width: 30px;
+    position: fixed;
+    top: 200px;
+    right: 480px;
+}
+
+.img2 {
+    height: 40px;
+    width: 40px;
+    position: fixed;
+    top: 197px;
+    right: 395px;
+}
+
+.img3 {
+    height: 40px;
+    width: 40px;
+    position: fixed;
+    top: 197px;
+    right: 315px;
+}
+
+.border {
+    height: 1px;
+    width: 700px;
+    position: fixed;
+    display: block;
+    top: 250px;
+    right: 60px;
+    text-align: center;
+    background-color: rgb(191, 207, 223);
+}
+
+.text {
+    position: fixed;
+    top: 225px;
+    right: 403px;
+    background-color: white;
+    color: rgb(122, 131, 141);
+}
+
+.E {
+    position: fixed;
+    right: 530px;
+    top: 280px;
+    font-family: sans-serif;
+}
+
+.Email{
+    position: fixed;
+    top: 320px;
+    width: 400px;
+    height: 30px;
+    right: 165px;
+    border: 1px solid rgb(176, 189, 202);
+    border-radius: 2px;
+
+}
+
+.input::placeholder {
+    color: slategray;
+}
+
+.P {
+    position: fixed;
+    right: 500px;
+    top: 360px;
+    font-family: sans-serif;
+
+}
+
+.Pass {
+    position: fixed;
+    top: 400px;
+    width: 400px;
+    height: 30px;
+    right: 165px;
+    border: 1px solid rgb(176, 189, 202);
+    border-radius: 2px;
+
+}
+
+.input::placeholder {
+    color: slategray;
+}
+
+.btn {
+    position: fixed;
+    top: 450px;
+    width: 410px;
+    height: 30px;
+    right: 161px;
+    border: none;
+    background-color: #FBBC05;
+    border-radius: 4px;
+}
+
+.a {
+    position: fixed;
+    top: 500px;
+    right: 440px;
+    color: blue;
+    font-family: sans-serif;
+}
+
+.np {
+    position: fixed;
+    top: 530px;
+    right: 260px;
+    color: black;
+    font-family: sans-serif;
+}
+
+.np a {
+    color: blue; 
+    text-decoration: none;  
+    padding-left: 3px;
+}
