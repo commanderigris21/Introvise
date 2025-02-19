@@ -1,47 +1,107 @@
-// eslint-disable-next-line no-unused-vars
-import React from 'react'
-import './login.css'
+import React, { useState, useEffect } from "react";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import axios from "axios";
+import "./login.css";
 
-function login() {
+const clientId = "315124824926-eojplkm74o08v3qrsqjuudqbkfctmnhl.apps.googleusercontent.com";
+
+function Login() {
+  const [user, setUser] = useState(null);
+
+  // Handle Google Login Success
+  const handleLoginSuccess = async (credentialResponse) => {
+    try {
+        const res = await axios.post("http://localhost:8080/api/users/login", {
+            token: credentialResponse.credential,
+        });
+
+        console.log("Backend Response:", res.data); // Debugging
+
+        if (res.data.email) {
+            localStorage.setItem("userEmail", res.data.email); // Store email
+            window.location.href = `http://localhost:8080/api/users/me?email=${res.data.email}`;
+        } else {
+            console.error("Email not found in backend response");
+        }
+    } catch (error) {
+        console.error("OAuth login failed:", error);
+    }
+  };
+
+  // Fetch user profile from backend
+  const fetchUserProfile = async (email) => {
+    try {
+        const res = await axios.get(`http://localhost:8080/api/users/me?email=${email}`);
+        
+        console.log("User Profile:", res.data); // Debugging
+
+        if (res.status === 200) {
+            setUser(res.data);  // Store user in state
+        } else {
+            console.error("User not found");
+        }
+    } catch (error) {
+        console.error("Error fetching user profile:", error);
+    }
+  };
+
+  // Auto-fetch profile if user is already logged in
+  useEffect(() => {
+    const storedEmail = localStorage.getItem("userEmail");
+    if (storedEmail) {
+        fetchUserProfile(storedEmail);
+    }
+  }, []);
+
   return (
-    <div> 
-      <nav className='Nav'>
-        Introvise
-        </nav>
+    <GoogleOAuthProvider clientId={clientId}>
+      <div>
+        <nav className="Nav">Introvise</nav>
 
-      <div className='half'>
-        <div className='ad'>
-            <h1>AI-Powered Question Genration </h1> <br /> 
-            <p>🧠 Uses AI & NLP to genrate <br /> customized questions across <br />  various category.  </p>
-            </div>
+        <div className="half">
+          <div className="ad">
+            <h1>AI-Powered Question Generation</h1> <br />
+            <p>🧠 Uses AI & NLP to generate <br /> customized questions across <br /> various categories.</p>
+          </div>
         </div>
-    <p className='head'> Welcome Back to <span>Introvise! </span> </p>
-    <p className='sec'>Sign in with </p>
 
-    <img className='img' src="gog.png" alt="Google Logo here" /> 
-    <img className='img2' src="Git.png" alt="GitHub Logo Here"  />
-    <img className='img3' src="Lin.png" alt="" />
+        <p className="head">Welcome Back to <span>Introvise!</span></p>
+        <p className="sec">Sign in with </p>
 
-    <span className='border'>
-      <p className='text'> OR </p>
-    </span>
+        {/* Google Login Button */}
+        <div className="google-login">
+          <GoogleLogin
+            onSuccess={handleLoginSuccess}
+            onError={() => console.log("Login Failed")}
+            render={(renderProps) => (
+              <img
+                className="img"
+                src="gog.png"
+                alt="Google Logo"
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+              />
+            )}
+          />
+        </div>
 
-    <p className='E'>Email</p>
-    <input className='Email' type="text" placeholder='Value' />
+        <span className="border">
+          <p className="text"> OR </p>
+        </span>
 
-    <p className='P'>Password</p>
-    <input className='Pass' type="text" placeholder='Password' />
+        <p className="E">Email</p>
+        <input className="Email" type="text" placeholder="Enter Email" />
 
-    <button className='btn'> Sign In</button>
-    <a href="#" className='a'>Forgot password?</a>
-     
-    <p className='np'>Don&lsquo;t have an account?<a href="#">Sign Up</a></p>
+        <p className="P">Password</p>
+        <input className="Pass" type="password" placeholder="Enter Password" />
 
+        <button className="btn">Sign In</button>
+        <a href="#" className="a">Forgot password?</a>
 
-    </div>
-
-    
-  )
+        <p className="np">Don&lsquo;t have an account?<a href="#">Sign Up</a></p>
+      </div>
+    </GoogleOAuthProvider>
+  );
 }
 
-export default login
+export default Login;
