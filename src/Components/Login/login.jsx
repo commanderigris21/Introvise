@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { useNavigate } from 'react-router-dom';  // Importing useNavigate from react-router-dom
 import axios from "axios";
 import "./login.css";
 
@@ -7,6 +8,7 @@ const clientId = "315124824926-eojplkm74o08v3qrsqjuudqbkfctmnhl.apps.googleuserc
 
 function Login() {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate(); // Hook for navigation
 
   // Handle Google Login Success
   const handleLoginSuccess = async (credentialResponse) => {
@@ -19,7 +21,8 @@ function Login() {
 
         if (res.data.email) {
             localStorage.setItem("userEmail", res.data.email); // Store email
-            window.location.href = `http://localhost:8080/api/users/me?email=${res.data.email}`;
+            // Navigate to the Resume page
+            navigate('/resume');
         } else {
             console.error("Email not found in backend response");
         }
@@ -56,7 +59,10 @@ function Login() {
   return (
     <GoogleOAuthProvider clientId={clientId}>
       <div>
-        <nav className="Nav">Introvise</nav>
+        <nav className="Nav">
+          <img src="logo.png" alt="Logo" />
+          <h1 className="Inrovise">Introvise</h1>
+          </nav>
 
         <div className="half">
           <div className="ad">
@@ -95,7 +101,8 @@ function Login() {
         <p className="P">Password</p>
         <input className="Pass" type="password" placeholder="Enter Password" />
 
-        <button className="btn">Sign In</button>
+        {/* Add onClick to navigate to the Resume page */}
+        <button className="btnSign" onClick={() => navigate('/resume')}>Sign In</button>
         <a href="#" className="a">Forgot password?</a>
 
         <p className="np">Don&lsquo;t have an account?<a href="#">Sign Up</a></p>

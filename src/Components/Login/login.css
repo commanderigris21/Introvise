@@ -7,15 +7,27 @@ root {
     font-family: sans-serif;
 }
 
-.Nav {
+.Inrovise {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    z-index: +5;
     position: fixed;
-    left: 60px;
-    z-index: +1;
-    font-size: 25px;
+    left: 90px;
+    top: 20px;
     font-family: sans-serif;
-    font-weight: bolder;
-    color: blue;
-}
+  }
+  
+  /* Style for the image in the navbar */
+  .Nav img {
+    height: 50px;
+    width: auto;
+    margin-right: 10px;
+    z-index: +5;
+    position: fixed;
+    left: 40px;
+    top: 28px;
+  }
 
 .half {
     background-color: #EAF1FF;
@@ -26,6 +38,7 @@ root {
     left:0px;
     justify-content: center;
     align-items: center;
+    z-index: -1;
 }
 
 .ad {
@@ -139,14 +152,15 @@ root {
     color: slategray;
 }
 
-.btn {
-    position: fixed;
-    top: 450px;
+.btnSign{
+    position: absolute;
+    top: 455px;
+    left: 955px;
+    background-color: #FFB40F;
     width: 410px;
     height: 30px;
     right: 161px;
     border: none;
-    background-color: #FBBC05;
     border-radius: 4px;
 }
 

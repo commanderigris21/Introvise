@@ -1,0 +1,113 @@
+
+
+.txt1 {
+    font-family: sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    position: fixed;
+    top: 90px;
+    left: 50px;
+}
+
+.dropzone {
+    border: 2px solid #cccccc;
+    border-radius: 8px;
+    width: 500px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    background-color: rgb(232, 232, 232);
+    position: fixed;
+    top: 150px;
+    left: 50px;
+    font-family: sans-serif;
+}
+
+.dropzone:hover {
+    color: rgb(25, 118, 210);
+    border-color: rgb(25, 118, 210);
+}
+
+.dropzone .MuiSvgIcon-root {
+    margin-bottom: 10px;
+}
+
+.txt2 {
+    font-family: sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    position: fixed;
+    top: 270px;
+    left: 50px;
+}
+
+.inputs {
+    font-family: sans-serif;
+    position: fixed;
+    top: 330px;
+    left: 50px;
+}
+
+.filled-basic {
+    width: 500px;
+    font-family: sans-serif;
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+}
+
+.inputs2 {
+    font-family: sans-serif;
+    position: fixed;
+    top: 420px;
+    left: 50px;
+}
+
+.filled-basic2 {
+    width: 500px;
+    height: 38px;
+    font-family: sans-serif;
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+}
+
+.inputs3 {
+    font-family: sans-serif;
+    position: fixed;
+    top: 520px;
+    left: 50px;
+}
+
+.filled-basic3 {
+    width: 500px;
+    font-family: sans-serif;
+    word-wrap: break-word;      
+    overflow-wrap: break-word; 
+}
+
+.btn {
+    font-family: sans-serif;
+    position: fixed;
+    top: 600px;
+    left: 379px;
+    background-color: white;
+}
+
+.button {
+    width: 170px
+}
+
+.btn2 {
+    font-family: sans-serif;
+    position: fixed;
+    top: 600px;
+    left: 50px;
+    background-color: white;
+}
+
+.button2 {
+    width: 170px;
+}
