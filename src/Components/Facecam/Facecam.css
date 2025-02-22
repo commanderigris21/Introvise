@@ -49,69 +49,51 @@
     margin-left: 10px;
 }
 
-.btn-p {
+.btn-p, .btn-p1, .btn-p2, .btn-p3, .btn-p4, .btn-p5, .btn-p6 {
     background: url('public/ply-btn.svg') no-repeat center center;
     background-size: contain;
     border: none;
     width: 40px;
     height: 40px;
     cursor: pointer;
-    z-index: +1; 
-    position: fixed;
-    top: 185px;
-    right: 47px;
+    z-index: 100; /* Ensure the buttons are above other elements */
+    position: absolute;
+}
+
+.btn-p {
+    top: 4px;
+    right: 14px;
 }
 
 .btn-p1 {
-    background: url('public/ply-btn.svg') no-repeat center center;
-    background-size: contain;
-    border: none;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    z-index: +1; 
-    position: fixed;
-    top: 249px;
-    right: 47px;
+    top: 5px;
+    right:14px;
+    
 }
 
 .btn-p2 {
-    background: url('public/ply-btn.svg') no-repeat center center;
-    background-size: contain;
-    border: none;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    z-index: +1; 
-    position: fixed;
-    top: 185px;
-    right: 47px;
+    top: 5px;
+    right: 14px;
 }
 
 .btn-p3 {
-    background: url('public/ply-btn.svg') no-repeat center center;
-    background-size: contain;
-    border: none;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    z-index: +1; 
-    position: fixed;
-    top: 185px;
-    right: 47px;
+    top: 5px;
+    right: 14px;
 }
 
 .btn-p4 {
-    background: url('public/ply-btn.svg') no-repeat center center;
-    background-size: contain;
-    border: none;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    z-index: +1; 
-    position: fixed;
-    top: 185px;
-    right: 47px;
+    top: 5px;
+    right: 15px;
+}
+
+.btn-p5 {
+    top: 5px;
+    right: 14px;
+}
+
+.btn-p6 {
+    top: 5px;
+    right: 14px;
 }
 
 .p3 {
@@ -123,86 +105,42 @@
     right: 380px;
 }
 
-.div0 {
+.div0, .div1, .div2, .div3, .div4, .div5, .div6 {
     height: 50px;
     width: 600px;
     background-color: #cccc;
     border-radius: 5px;
     position: fixed;
-    top: 180px;
     right: 40px;
-    z-index: -1;
+    z-index: 1; /* Ensure the divs are behind the buttons */
+}
+
+.div0 {
+    top: 180px;
 }
 
 .div1 {
-    height: 50px;
-    width: 600px;
-    background-color: #cccc;
-    border-radius: 5px;
-    position: fixed;
     top: 245px;
-    right: 40px;
-    z-index: -1;
-
 }
 
 .div2 {
-    height: 50px;
-    width: 600px;
-    background-color: #cccc;
-    border-radius: 5px;
-    position: fixed;
     top: 305px;
-    right: 40px;
-    z-index: -1;
-
 }
 
 .div3 {
-    height: 50px;
-    width: 600px;
-    background-color: #cccc;
-    border-radius: 5px;
-    position: fixed;
     top: 365px;
-    right: 40px;
-    z-index: -1;
 }
 
 .div4 {
-    height: 50px;
-    width: 600px;
-    background-color: #cccc;
-    border-radius: 5px;
-    position: fixed;
     top: 425px;
-    right: 40px;
-    z-index: -1;
-
 }
 
 .div5 {
-    height: 50px;
-    width: 600px;
-    background-color: #cccc;
-    border-radius: 5px;
-    position: fixed;
     top: 485px;
-    right: 40px;
-    z-index: -1;
-
 }
 
 .div6 {
-    height: 50px;
-    width: 600px;
-    background-color: #cccc;
-    border-radius: 5px;
-    position: fixed;
     top: 545px;
-    right: 40px;
-    z-index: -1;
-
 }
 
 .btnx {
