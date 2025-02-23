@@ -1,50 +1,81 @@
 import React, { useState, useEffect } from "react";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import { useNavigate } from 'react-router-dom';  // Importing useNavigate from react-router-dom
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./login.css";
 
 const clientId = "315124824926-eojplkm74o08v3qrsqjuudqbkfctmnhl.apps.googleusercontent.com";
 
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useNavigate();
 
-  // Handle Google Login Success
-  const handleLoginSuccess = async (credentialResponse) => {
+  // Handle Manual Sign-In
+  const handleSignIn = async () => {
+    if (!email || !password) {
+      alert("Please enter both email and password!");
+      return;
+    }
+
     try {
-        const res = await axios.post("http://localhost:8080/api/users/login", {
-            token: credentialResponse.credential,
-        });
+      const res = await axios.post("http://localhost:8080/api/users/login1", {
+        email,
+        password,
+      });
 
-        console.log("Backend Response:", res.data); // Debugging
+      console.log("Login Response:", res.data);
 
-        if (res.data.email) {
-            localStorage.setItem("userEmail", res.data.email); // Store email
-            // Navigate to the Resume page
-            navigate('/resume');
-        } else {
-            console.error("Email not found in backend response");
-        }
+      if (res.data && res.data.email) {
+        localStorage.setItem("userEmail", res.data.email);
+        navigate("/resume");
+      } else {
+        alert("Invalid credentials! Redirecting to signup.");
+        navigate("/signup");
+      }
     } catch (error) {
-        console.error("OAuth login failed:", error);
+      console.error("Login failed:", error.response?.data || error.message);
+      alert("Invalid credentials! Redirecting to signup.");
+      navigate("/signup");
     }
   };
 
-  // Fetch user profile from backend
+  // Handle Google Login
+  const handleLoginSuccess = async (credentialResponse) => {
+    try {
+      const res = await axios.post("http://localhost:8080/api/users/login", {
+        token: credentialResponse.credential,
+      });
+
+      console.log("Backend Response:", res.data);
+
+      if (res.data.email) {
+        localStorage.setItem("userEmail", res.data.email);
+        await fetchUserProfile(res.data.email);
+        navigate("/resume");
+      } else {
+        alert("Google login failed!");
+      }
+    } catch (error) {
+      console.error("OAuth login failed:", error.response?.data || error.message);
+      alert("Google login failed!");
+    }
+  };
+
+  // Fetch User Profile
   const fetchUserProfile = async (email) => {
     try {
-        const res = await axios.get(`http://localhost:8080/api/users/me?email=${email}`);
-        
-        console.log("User Profile:", res.data); // Debugging
+      const res = await axios.get(http://localhost:8080/api/users/me?email=${email});
 
-        if (res.status === 200) {
-            setUser(res.data);  // Store user in state
-        } else {
-            console.error("User not found");
-        }
+      console.log("User Profile:", res.data);
+      if (res.status === 200 && res.data) {
+        setUser(res.data);
+      } else {
+        console.error("User profile not found");
+      }
     } catch (error) {
-        console.error("Error fetching user profile:", error);
+      console.error("Error fetching user profile:", error);
     }
   };
 
@@ -52,7 +83,7 @@ function Login() {
   useEffect(() => {
     const storedEmail = localStorage.getItem("userEmail");
     if (storedEmail) {
-        fetchUserProfile(storedEmail);
+      fetchUserProfile(storedEmail);
     }
   }, []);
 
@@ -62,32 +93,28 @@ function Login() {
         <nav className="Nav">
           <img src="logo.png" alt="Logo" />
           <h1 className="Inrovise">Introvise</h1>
-          </nav>
+        </nav>
 
         <div className="half">
           <div className="ad">
             <h1>AI-Powered Question Generation</h1> <br />
-            <p>🧠 Uses AI & NLP to generate <br /> customized questions across <br /> various categories.</p>
+            <p>
+              🧠 Uses AI & NLP to generate <br /> customized questions across
+              <br /> various categories.
+            </p>
           </div>
         </div>
 
-        <p className="head">Welcome Back to <span>Introvise!</span></p>
+        <p className="head">
+          Welcome Back to <span>Introvise!</span>
+        </p>
         <p className="sec">Sign in with </p>
 
         {/* Google Login Button */}
         <div className="google-login">
           <GoogleLogin
             onSuccess={handleLoginSuccess}
-            onError={() => console.log("Login Failed")}
-            render={(renderProps) => (
-              <img
-                className="img"
-                src="gog.png"
-                alt="Google Logo"
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-              />
-            )}
+            onError={() => alert("Google Login Failed")}
           />
         </div>
 
@@ -96,16 +123,33 @@ function Login() {
         </span>
 
         <p className="E">Email</p>
-        <input className="Email" type="text" placeholder="Enter Email" />
+        <input
+          className="Email"
+          type="text"
+          placeholder="Enter Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
         <p className="P">Password</p>
-        <input className="Pass" type="password" placeholder="Enter Password" />
+        <input
+          className="Pass"
+          type="password"
+          placeholder="Enter Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-        {/* Add onClick to navigate to the Resume page */}
-        <button className="btnSign" onClick={() => navigate('/resume')}>Sign In</button>
-        <a href="#" className="a">Forgot password?</a>
+        <button className="btnSign" onClick={handleSignIn}>
+          Sign In
+        </button>
+        <a href="#" className="a">
+          Forgot password?
+        </a>
 
-        <p className="np">Don&lsquo;t have an account?<a href="#">Sign Up</a></p>
+        <p className="np">
+          Don&lsquo;t have an account? <a href="/signup">Sign Up</a>
+        </p>
       </div>
     </GoogleOAuthProvider>
   );
