@@ -10,14 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@alptugidin/react-circular-progress-bar": "^1.1.4",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.5",
     "@mui/material": "^6.4.5",
     "@react-oauth/google": "^0.12.1",
     "axios": "^1.7.9",
+    "jspdf": "^3.0.0",
     "motion": "^12.4.3",
     "react": "^19.0.0",
+    "react-circular-progressbar": "^2.2.0",
     "react-dom": "^19.0.0",
     "react-dropzone": "^14.3.5",
     "react-icons": "^5.4.0",

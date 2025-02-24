@@ -66,7 +66,7 @@ function Login() {
   // Fetch User Profile
   const fetchUserProfile = async (email) => {
     try {
-      const res = await axios.get(http://localhost:8080/api/users/me?email=${email});
+      const res = await axios.get(`http://localhost:8080/api/users/me?email=${email}`);
 
       console.log("User Profile:", res.data);
       if (res.status === 200 && res.data) {

@@ -155,3 +155,18 @@
     right: 490px;
 }
 
+.btn-next {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    width: 150px;
+    height: 30px;
+    border-radius: 3px;
+    position: fixed;
+    top: 610px;
+    right: 40px; /* Adjusted to move the button to the right */
+}
+
+.btn-next:hover {
+    background-color: #218838;
+}

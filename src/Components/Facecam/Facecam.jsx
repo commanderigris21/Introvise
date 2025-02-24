@@ -1,11 +1,13 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Facecam.css';
 
 const Facecam = () => {
     const [stream, setStream] = useState(null);
     const [isMuted, setIsMuted] = useState(false);
     const videoRef = useRef(null);
+    const navigate = useNavigate();
 
     const startCamera = async () => {
         try {
@@ -42,6 +44,10 @@ const Facecam = () => {
         console.log('Submit button clicked');
     };
 
+    const handleNext = () => {
+        navigate('/dashboard');
+    };
+
     return (
         <div>
             <div className="facecam-container">
@@ -71,6 +77,7 @@ const Facecam = () => {
                 <div className='div5'><p>6. How do you prioritize your work?</p> <button className='btn-p5' onClick={startCamera}></button></div>
                 <div className='div6'><p>7. Do you have any questions for us?</p> <button className='btn-p6' onClick={startCamera}></button></div>
                 <button className='btnx'>Leave Interview</button>
+                <button className='btn-next' onClick={handleNext}>Next</button>
             </div>
         </div>
     );
