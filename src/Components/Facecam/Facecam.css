@@ -1,172 +1,147 @@
-.p1 {
-    font-family: sans-serif;
-    font-size: 24px;
-    font-weight: 700;
-    padding-left: 80px;
-    padding-top: 40px;
+\/* Facecam Container */
+.facecam-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.facecam-video-container {
-    background-color: #cccc;
-    border-radius: 8px;
-    height: 400px;
-    width: 600px;
+.p1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Controls */
+.facecam-controls {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.facecam-button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.facecam-button:hover {
+    background-color: #0056b3;
+}
+
+/* Video Container */
+.facecam-video-container {
     position: relative;
-    position: fixed;
-    top: 180px;
-    left: 81px;
+    width: 100%;
+    max-width: 600px;
+    height: 350px;
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid #ccc;
 }
 
 .facecam-video {
-    border-radius: 8px;
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
 .facecam-placeholder {
-    color: #cccc;
-    position: absolute;
-    text-align: center;
-}
-
-.facecam-controls {
-   position: fixed;
-   top: 600px;
-   left: 155px;
-}
-
-.facecam-button {
-    background-color: rgb(25, 118, 210);
     color: white;
-    border: none;
-    border-radius: 5px;
-    width: 100px;
-    height: 30px;
-    margin-left: 10px;
+    font-size: 18px;
 }
 
-.btn-p, .btn-p1, .btn-p2, .btn-p3, .btn-p4, .btn-p5, .btn-p6 {
-    background: url('public/ply-btn.svg') no-repeat center center;
-    background-size: contain;
-    border: none;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    z-index: 100; /* Ensure the buttons are above other elements */
-    position: absolute;
-}
-
-.btn-p {
-    top: 4px;
-    right: 14px;
-}
-
-.btn-p1 {
-    top: 5px;
-    right:14px;
-    
-}
-
-.btn-p2 {
-    top: 5px;
-    right: 14px;
-}
-
-.btn-p3 {
-    top: 5px;
-    right: 14px;
-}
-
-.btn-p4 {
-    top: 5px;
-    right: 15px;
-}
-
-.btn-p5 {
-    top: 5px;
-    right: 14px;
-}
-
-.btn-p6 {
-    top: 5px;
-    right: 14px;
+/* Interview Questions */
+.interview {
+    margin-top: 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    position: fixed;
+    right: 40px;
+    bottom: 30%;
+    width: 50%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .p3 {
-    font-family: sans-serif;
-    font-size: 24px;
-    font-weight: 700;
-    position: fixed;
-    top: 115px;
-    right: 380px;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
 }
 
-.div0, .div1, .div2, .div3, .div4, .div5, .div6 {
-    height: 50px;
-    width: 600px;
-    background-color: #cccc;
-    border-radius: 5px;
-    position: fixed;
-    right: 40px;
-    z-index: 1; /* Ensure the divs are behind the buttons */
+.interview div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
 }
 
-.div0 {
-    top: 180px;
+.interview div:last-child {
+    border-bottom: none;
 }
 
-.div1 {
-    top: 245px;
+.btn-p1, .btn-p2, .btn-p3, .btn-p4, .btn-p5, .btn-p6 {
+    width: 30px;
+    height: 30px;
+    background: red;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    transition: 0.3s;
 }
 
-.div2 {
-    top: 305px;
-}
-
-.div3 {
-    top: 365px;
-}
-
-.div4 {
-    top: 425px;
-}
-
-.div5 {
-    top: 485px;
-}
-
-.div6 {
-    top: 545px;
+.btn-p1:hover, .btn-p2:hover, .btn-p3:hover, .btn-p4:hover, .btn-p5:hover, .btn-p6:hover {
+    background: darkred;
 }
 
 .btnx {
-    background-color: tomato;
+    display: block;
+    width: 40%;
+    padding: 10px;
+    background: #dc3545;
     color: white;
+    font-size: 16px;
     border: none;
-    width: 150px;
-    height: 30px;
-    border-radius: 3px;
-    position: fixed;
-    top: 610px;
-    right: 490px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 20px;
+    transition: 0.3s;
 }
 
-.btn-next {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    width: 150px;
-    height: 30px;
-    border-radius: 3px;
-    position: fixed;
-    top: 610px;
-    right: 40px; /* Adjusted to move the button to the right */
+.btnx:hover {
+    background: #a71d2a;
 }
 
-.btn-next:hover {
-    background-color: #218838;
+.btnN {
+    display: block;
+    width: 20%;
+    padding: 10px;
+    background: skyblue;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: fixed;
+    top: 449px;
+    right: 50px;
+    transition: 0.3s;
 }
