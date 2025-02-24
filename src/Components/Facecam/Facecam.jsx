@@ -1,13 +1,16 @@
-// eslint-disable-next-line no-unused-vars
 import React, { useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './Facecam.css';
 
 const Facecam = () => {
     const [stream, setStream] = useState(null);
     const [isMuted, setIsMuted] = useState(false);
+    const [isRecording, setIsRecording] = useState(false);
+    const [recordedVideos, setRecordedVideos] = useState({});
     const videoRef = useRef(null);
-    const navigate = useNavigate();
+    const mediaRecorderRef = useRef(null);
+    const recordedChunks = useRef([]);
+    const [currentQuestion, setCurrentQuestion] = useState(null);
 
     const startCamera = async () => {
         try {
@@ -17,7 +20,7 @@ const Facecam = () => {
                 videoRef.current.srcObject = mediaStream;
             }
         } catch (err) {
-            console.error('Error accessing media devices.', err);
+            console.error('Error accessing media devices:', err);
         }
     };
 
@@ -40,12 +43,67 @@ const Facecam = () => {
         }
     };
 
-    const handleSubmit = () => {
-        console.log('Submit button clicked');
+    const startRecording = (question) => {
+        if (!stream) {
+            alert("Please start the camera first.");
+            return;
+        }
+
+        if (isRecording) {
+            alert("A recording is already in progress.");
+            return;
+        }
+
+        setCurrentQuestion(question);
+        recordedChunks.current = [];
+        const options = { mimeType: 'video/webm' };
+        const mediaRecorder = new MediaRecorder(stream, options);
+        mediaRecorderRef.current = mediaRecorder;
+
+        mediaRecorder.ondataavailable = (event) => {
+            if (event.data.size > 0) {
+                recordedChunks.current.push(event.data);
+            }
+        };
+
+        mediaRecorder.onstop = () => {
+            const blob = new Blob(recordedChunks.current, { type: 'video/webm' });
+            setRecordedVideos(prev => ({ ...prev, [question]: blob }));
+        };
+
+        mediaRecorder.start();
+        setIsRecording(true);
     };
 
-    const handleNext = () => {
-        navigate('/dashboard');
+    const stopRecording = () => {
+        if (mediaRecorderRef.current) {
+            mediaRecorderRef.current.stop();
+            setIsRecording(false);
+        }
+    };
+
+    const handleSubmit = async (question) => {
+        if (!recordedVideos[question]) {
+            alert(`No video recorded for "${question}". Please record an answer first.`);
+            return;
+        }
+
+        // Convert Blob to File
+        const videoBlob = recordedVideos[question];
+        const videoFile = new File([videoBlob], "recording.webm", { type: "video/webm" });
+
+        const formData = new FormData();
+        formData.append("question", question);
+        formData.append("video", videoFile); // Correctly append as a file
+
+        try {
+            const response = await axios.post("http://localhost:8080/api/videos/upload", formData, {
+                headers: { "Content-Type": "multipart/form-data" }
+            });
+            alert(`Video uploaded successfully! ID: ${response.data}`);
+        } catch (error) {
+            console.error(`Error uploading video for "${question}":`, error);
+        }
     };
 
     return (
@@ -58,7 +116,6 @@ const Facecam = () => {
                         <>
                             <button className="facecam-button" onClick={stopCamera}>Stop Camera</button>
                             <button className="facecam-button" onClick={toggleMute}>{isMuted ? 'Unmute' : 'Mute'}</button>
-                            <button className="facecam-button" onClick={handleSubmit}>Submit</button>
                         </>
                     )}
                 </div>
@@ -67,17 +124,24 @@ const Facecam = () => {
                     {!stream && <div className="facecam-placeholder">Camera is off</div>}
                 </div>
             </div>
+
             <div className='interview'>
                 <p className='p3'>Interview Questions</p>
-                <div className='div0'><p>1. Can you tell about yourself?</p> <button className='btn-p1' onClick={startCamera}></button></div>
-                <div className='div1'><p>2. What are your greatest strengths and weaknesses?</p> <button className='btn-p2' onClick={startCamera}></button></div>
-                <div className='div2'><p>3. Why do you want to work here?</p> <button className='btn-p3' onClick={startCamera}></button></div>
-                <div className='div3'><p>4. Describe a challenging situation you have encountered and how you overcame it.</p> <button className='btn-p' onClick={startCamera}></button></div>
-                <div className='div4'><p>5. Where do you see yourself in 5 years?</p> <button className='btn-p4' onClick={startCamera}></button></div>
-                <div className='div5'><p>6. How do you prioritize your work?</p> <button className='btn-p5' onClick={startCamera}></button></div>
-                <div className='div6'><p>7. Do you have any questions for us?</p> <button className='btn-p6' onClick={startCamera}></button></div>
+                {[
+                    "Can you tell about yourself?",
+                ].map((question, index) => (
+                    <div key={index} className={`div${index}`}>
+                        <p>{index + 1}. {question}</p>
+                        {isRecording && currentQuestion === question ? (
+                            <button className='btn-p' onClick={stopRecording}>⏹ Stop Recording</button>
+                        ) : (
+                            <button className='btn-p' onClick={() => startRecording(question)}>🎤 Start Recording</button>
+                        )}
+                        <button className='btn-submit' onClick={() => handleSubmit(question)}>📤 Upload</button>
+                    </div>
+                ))}
                 <button className='btnx'>Leave Interview</button>
-                <button className='btn-next' onClick={handleNext}>Next</button>
+                <button className='btnN'>Next</button>
             </div>
         </div>
     );
