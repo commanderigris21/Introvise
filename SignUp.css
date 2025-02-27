@@ -1,0 +1,83 @@
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; 
+  background-color: transparent;
+  height: 50vh;
+  padding-top: 80px; 
+  animation: fadeIn 1s ease-in-out;
+}
+
+.signup-header {
+  font-size: 3rem;
+  margin-top: 10px; 
+  color: #333;
+  animation: slideInDown 1s ease-in-out;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%; 
+  max-width: 500px; 
+  gap: 1.5rem;
+  animation: slideInUp 1s ease-in-out;
+}
+
+.signup-input {
+  margin-bottom: 1rem;
+  width: 100%; 
+}
+
+.signup-button {
+  background-color: #1976d2;
+  color: white;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.signup-button:hover {
+  background-color: #1565c0;
+}
+
+.google-login {
+  margin-top: 1.5rem;
+  animation: fadeIn 2s ease-in-out;
+  position: fixed;
+  width: 500px;
+  top: 547px;
+  left: 33.4%;
+
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
